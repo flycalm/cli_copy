@@ -1,9 +1,8 @@
 # Remote Terminal Image Paste
-
+![alt text](image-1.png)
 一个专门面向 `Windows 本地 VS Code + Remote-SSH + Ubuntu 远端终端` 的 VS Code 扩展。
 
 它只做一件事：
-
 - 从 Windows 本地剪贴板读取截图
 - 通过 VS Code 的远端文件系统 API 写到远端工作区
 - 把远端图片路径或 `@路径` 这样的引用文本插入当前终端
