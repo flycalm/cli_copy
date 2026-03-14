@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <!-- 主渐变背景 -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <!-- 终端绿色光晕 -->
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" style="stop-color:#00d4aa;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#00d4aa;stop-opacity:0"/>
+    </radialGradient>
+    <!-- 图片彩色渐变 -->
+    <linearGradient id="imgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="50%" style="stop-color:#f5a623"/>
+      <stop offset="100%" style="stop-color:#7b68ee"/>
+    </linearGradient>
+    <!-- 箭头渐变 -->
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4aa"/>
+      <stop offset="100%" style="stop-color:#4ecdc4"/>
+    </linearGradient>
+    <!-- 阴影 -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 圆角矩形背景 -->
+  <rect x="8" y="8" width="240" height="240" rx="40" ry="40" fill="url(#bg)" filter="url(#shadow)"/>
+
+  <!-- 光晕效果 -->
+  <rect x="8" y="8" width="240" height="240" rx="40" ry="40" fill="url(#glow)"/>
+
+  <!-- 边框光效 -->
+  <rect x="8" y="8" width="240" height="240" rx="40" ry="40" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- 终端窗口 -->
+  <g transform="translate(30, 40)">
+    <!-- 终端主体 -->
+    <rect x="0" y="0" width="130" height="100" rx="8" ry="8" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+
+    <!-- 终端标题栏 -->
+    <rect x="0" y="0" width="130" height="20" rx="8" ry="8" fill="#21262d"/>
+    <rect x="0" y="10" width="130" height="10" fill="#21262d"/>
+
+    <!-- 标题栏按钮 -->
+    <circle cx="14" cy="10" r="3.5" fill="#f85149"/>
+    <circle cx="26" cy="10" r="3.5" fill="#f0c541"/>
+    <circle cx="38" cy="10" r="3.5" fill="#3fb950"/>
+
+    <!-- 终端文本行 -->
+    <text x="10" y="38" font-family="monospace" font-size="9" fill="#3fb950" opacity="0.9">$</text>
+    <rect x="20" y="30" width="45" height="8" rx="1" fill="#3fb950" opacity="0.4"/>
+
+    <text x="10" y="52" font-family="monospace" font-size="9" fill="#3fb950" opacity="0.9">$</text>
+    <rect x="20" y="44" width="60" height="8" rx="1" fill="#3fb950" opacity="0.3"/>
+
+    <text x="10" y="66" font-family="monospace" font-size="9" fill="#3fb950" opacity="0.9">$</text>
+    <rect x="20" y="58" width="35" height="8" rx="1" fill="#3fb950" opacity="0.2"/>
+
+    <!-- 光标闪烁 -->
+    <rect x="10" y="74" width="7" height="10" rx="1" fill="#3fb950" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="1.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- 图片图标 -->
+  <g transform="translate(135, 120)">
+    <!-- 图片卡片 -->
+    <rect x="0" y="0" width="85" height="70" rx="8" ry="8" fill="#1a1a2e" stroke="url(#imgGrad)" stroke-width="2.5"/>
+
+    <!-- 图片内容 - 山和太阳 -->
+    <circle cx="25" cy="22" r="10" fill="#f5a623" opacity="0.9"/>
+
+    <!-- 山脉 -->
+    <polygon points="10,58 30,28 50,58" fill="#e94560" opacity="0.7"/>
+    <polygon points="35,58 55,22 75,58" fill="#7b68ee" opacity="0.7"/>
+
+    <!-- 底部遮罩 -->
+    <rect x="1" y="52" width="83" height="17" rx="0" ry="0" fill="#1a1a2e" opacity="0.3"/>
+  </g>
+
+  <!-- 粘贴箭头 - 从图片指向终端 -->
+  <g filter="url(#glowFilter)">
+    <path d="M140,155 Q110,145 95,135" fill="none" stroke="url(#arrowGrad)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="8,4">
+      <animate attributeName="stroke-dashoffset" values="24;0" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <!-- 箭头头部 -->
+    <polygon points="89,132 97,139 99,129" fill="#00d4aa"/>
+  </g>
+
+  <!-- 剪贴板图标小标记 -->
+  <g transform="translate(168, 100)">
+    <rect x="0" y="0" width="22" height="26" rx="3" ry="3" fill="#0d1117" stroke="#00d4aa" stroke-width="1.5"/>
+    <rect x="5" y="-3" width="12" height="6" rx="2" ry="2" fill="#00d4aa"/>
+    <rect x="4" y="9" width="14" height="2" rx="1" fill="#00d4aa" opacity="0.5"/>
+    <rect x="4" y="14" width="10" height="2" rx="1" fill="#00d4aa" opacity="0.4"/>
+    <rect x="4" y="19" width="12" height="2" rx="1" fill="#00d4aa" opacity="0.3"/>
+  </g>
+
+  <!-- SSH 连接标记 -->
+  <g transform="translate(42, 155)">
+    <rect x="0" y="0" width="50" height="20" rx="10" ry="10" fill="#0d1117" stroke="#00d4aa" stroke-width="1.2"/>
+    <text x="25" y="14" font-family="monospace" font-size="9" fill="#00d4aa" text-anchor="middle" font-weight="bold">SSH</text>
+  </g>
+
+  <!-- 底部装饰小点 -->
+  <circle cx="128" cy="225" r="2" fill="#00d4aa" opacity="0.6"/>
+  <circle cx="118" cy="225" r="1.5" fill="#00d4aa" opacity="0.4"/>
+  <circle cx="138" cy="225" r="1.5" fill="#00d4aa" opacity="0.4"/>
+</svg>

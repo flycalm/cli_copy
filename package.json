@@ -1,0 +1,140 @@
+{
+  "name": "remote-terminal-image-paste",
+  "displayName": "Remote Terminal Image Paste",
+  "description": "Paste Windows clipboard images into Remote-SSH terminals by writing them to the remote workspace and inserting the image path.",
+  "version": "0.0.2",
+  "publisher": "local-dev",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other",
+    "Terminal",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "remote-ssh",
+    "terminal",
+    "clipboard",
+    "image",
+    "codex",
+    "claude",
+    "gemini"
+  ],
+  "activationEvents": [
+    "onCommand:remoteTerminalImagePaste.pasteImage",
+    "onCommand:remoteTerminalImagePaste.cleanupSavedImages"
+  ],
+  "icon": "logo.png",
+  "main": "./out/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "remoteTerminalImagePaste.pasteImage",
+        "title": "Remote Terminal Image Paste: Paste Image To Remote Terminal"
+      },
+      {
+        "command": "remoteTerminalImagePaste.cleanupSavedImages",
+        "title": "Remote Terminal Image Paste: Cleanup Saved Images"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "remoteTerminalImagePaste.pasteImage",
+        "key": "ctrl+shift+v",
+        "when": "terminalFocus && isWindows && config.remoteTerminalImagePaste.shortcut == 'ctrlShiftV'"
+      },
+      {
+        "command": "remoteTerminalImagePaste.pasteImage",
+        "key": "ctrl+alt+v",
+        "when": "terminalFocus && isWindows && config.remoteTerminalImagePaste.shortcut == 'ctrlAltV'"
+      },
+      {
+        "command": "remoteTerminalImagePaste.pasteImage",
+        "key": "alt+v",
+        "when": "terminalFocus && isWindows && config.remoteTerminalImagePaste.shortcut == 'altV'"
+      }
+    ],
+    "configuration": {
+      "title": "Remote Terminal Image Paste",
+      "properties": {
+        "remoteTerminalImagePaste.shortcut": {
+          "type": "string",
+          "default": "ctrlAltV",
+          "enum": [
+            "ctrlShiftV",
+            "ctrlAltV",
+            "altV",
+            "none"
+          ],
+          "markdownDescription": "Shortcut used to trigger image paste in the terminal. The default is `Ctrl+Alt+V`. Select `none` to disable the contributed shortcut and use the command palette only."
+        },
+        "remoteTerminalImagePaste.remoteDirectory": {
+          "type": "string",
+          "default": ".vscode-ai-images",
+          "markdownDescription": "Directory used on the remote machine. Relative paths resolve under the first workspace folder. Absolute paths are used as-is on the remote machine."
+        },
+        "remoteTerminalImagePaste.fileNameTemplate": {
+          "type": "string",
+          "default": "clip-{timestamp}.png",
+          "markdownDescription": "Remote file name template. Supported tokens: `{timestamp}`, `{date}`, `{time}`, `{random}`."
+        },
+        "remoteTerminalImagePaste.insertTemplate": {
+          "type": "string",
+          "default": "{path}",
+          "markdownDescription": "Template inserted into the terminal after the image is materialized. Supported tokens: `{path}`, `{quotedPath}`, `{workspaceRelativePath}`, `{fileName}`."
+        },
+        "remoteTerminalImagePaste.autoAddGitIgnore": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Automatically ensure the remote image directory is ignored by the workspace `.gitignore`."
+        },
+        "remoteTerminalImagePaste.maxFileSizeMb": {
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "markdownDescription": "Maximum clipboard image size in MB before the paste is blocked."
+        },
+        "remoteTerminalImagePaste.cleanup.maxFiles": {
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "markdownDescription": "Keep at most this many newest pasted images in the remote directory. Set to `0` to disable count-based cleanup."
+        },
+        "remoteTerminalImagePaste.cleanup.maxAgeDays": {
+          "type": "number",
+          "default": 14,
+          "minimum": 0,
+          "markdownDescription": "Delete pasted images older than this many days. Set to `0` to disable age-based cleanup."
+        },
+        "remoteTerminalImagePaste.confirmBeforeUpload": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show a confirmation prompt before creating a remote file."
+        },
+        "remoteTerminalImagePaste.outputChannelVerbose": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Emit detailed logs to the output channel."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "check": "tsc -p ./ --noEmit",
+    "watch": "tsc -p ./ -w",
+    "package:vsix": "vsce package"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.2",
+    "@types/node": "^22.13.10",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.8.2"
+  }
+}

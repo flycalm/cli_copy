@@ -1,0 +1,8 @@
+.vscode/**
+src/**
+node_modules/**
+tsconfig.json
+AGENTS.md
+方案.md
+安装教程.md
+package-lock.json
