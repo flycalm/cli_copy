@@ -1,3 +1,4 @@
 node_modules
 out
 *.vsix
+!remote-terminal-image-paste-0.0.2.vsix

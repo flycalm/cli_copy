@@ -3,8 +3,12 @@
   "displayName": "Remote Terminal Image Paste",
   "description": "Paste Windows clipboard images into Remote-SSH terminals by writing them to the remote workspace and inserting the image path.",
   "version": "0.0.2",
-  "publisher": "local-dev",
+  "publisher": "flycalm",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flycalm/cli_copy.git"
+  },
   "engines": {
     "vscode": "^1.95.0"
   },
